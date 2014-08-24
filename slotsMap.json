@@ -1,0 +1,8 @@
+{ "slots" :
+[
+    { "name": "12:00", "free": true }, { "name": "13:00", "free": true }, { "name": "Slot3", "free": false },
+    { "name": "Slot4", "free": true }, { "name": "Slot5", "free": true }, { "name": "Slot6", "free": true },
+    { "name": "Slot7", "free": true }, { "name": "Slot8", "free": false }, { "name": "Slot9", "free": false }
+]
+}
+

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html ng-app="gemStore">
+  <head>
+<!--	<link rel="shortcut icon" href="/img/icon.jpg" type="image/x-icon">-->
+<!--	<link rel="icon" href="img/icon.jpg" type="image/x-icon">-->
+    <link rel="icon" href="img/logowileo.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="mw.css" />
+    <script type="text/javascript" src="angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+  </head>
+  <body ng-controller='StoreController as store'>
+<!--
+    <div class="product row">
+      <h3>
+        {{store.product.name}}
+        <em class="pull-right">{{store.product.price}}</em>
+      </h3>
+    </div>
+-->
+
+<h3>Time slot schedule</h3>
+    <div class="container-outer">
+      <div class="container-inner, unselectable" ng-controller='SlotsController as slots'>
+<!--        <h5>ceiofcmeoictj39428utf598ucyfvghuic3m58t3cmhvgjv395uk5trt7hcguc3985tfcvuk5t98u43y6mvutmjgmvevc985ut75tyhv3igjc93</h5>-->
+        <form>
+	<table id="slots-table">
+          <tr>
+            <th class="vertical-text" ng-repeat="slot in slots.slots">{{slot.name}}</th>
+          </tr>
+          <tr>
+            <td ng-repeat="slot in slots.slots" ng-class="{selected: chosen, available: slot.free, known: slot.usr}">
+              <label for="{{slot.name}}"><input type="checkbox" id="{{slot.name}}" ng-model="chosen" ng-disabled="!slot.free"></label>
+            </td> 
+          </tr>
+        </table>
+        </form>
+      </div>
+    </div>
+
+<div>
+<h3>Legend</h3>
+<table id="slots-table">
+  <tr>
+    <td class="available">slot is free</td> 
+  </tr>
+  <tr>
+    <td class="known">slot already reserved by you</td> 
+  </tr>
+  <tr>
+    <td class="selected">slot to be requested</td> 
+  </tr>
+  <tr>
+    <td>slot is unavailable</td> 
+  </tr>
+</table>
+</div>
+
+
+
+
+
+<!--
+<table id="table1">
+  <tr>
+    <td>account</td>
+    <td>l1</td>
+    <td>l2</td>
+  </tr>
+  <tr>
+    <td>123456</td>
+    <td><label for="a"><input id="a" type="checkbox" name='123456[l1]'>name 1</label></td>
+    <td><label for="b"><input id="b" type="checkbox" name='123456[l2]'>address 1</label></td>
+  </tr>
+  <tr>
+    <td>654321</td>
+    <td><label for="c"><input id="c" type="checkbox" name='654321[l1]'>name 2</label></td>
+    <td><label for="d"><input id="d" type="checkbox" name='654321[l2]'>address 2</label></td>
+  </tr>
+</table>
+-->
+
+
+  </body>
+</html>
+
