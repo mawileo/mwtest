@@ -4,7 +4,7 @@
 <!--	<link rel="shortcut icon" href="/img/icon.jpg" type="image/x-icon">-->
 <!--	<link rel="icon" href="img/icon.jpg" type="image/x-icon">-->
     <link rel="icon" href="img/logowileo.png" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+<!--    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />-->
     <link rel="stylesheet" type="text/css" href="mw.css" />
     <script type="text/javascript" src="angular.min.js"></script>
     <script type="text/javascript" src="app.js"></script>
@@ -57,9 +57,6 @@
 </div>
 
 
-
-
-
 <!--
 <table id="table1">
   <tr>
@@ -79,6 +76,25 @@
   </tr>
 </table>
 -->
+
+
+<h3>Login panel</h3>
+<h4>Current user: {{ usrname }}</h4>
+<div>
+	<form ng-controller="LoginController as lg" ng-submit="lg.lgn()">
+		Username:<input type="text" ng-model="lg.usrname">
+		Password:<input type="password" ng-model="lg.usrpwd">
+<!--		<button ng-click="lgn()">Login</button>-->
+		<input type="submit" value="Login" />
+		<br>
+	</form>
+<!--		{{$rootScope.usrname}}/{{$rootScope.usrpwd}}-->
+</div>
+<!--		{{usrname}}/{{usrpwd}}-->
+
+
+
+
 
 
   </body>

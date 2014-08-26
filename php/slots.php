@@ -9,10 +9,10 @@ class Slots {
        $this->reservable = $r;
   }
 
-  public function getSlotMap() {
+  public function getSlotMap($usrname) {
 
 	$reservation_info = $this->reservable->getCurrentSchedule();
-	$this->annonymizeReservedBy($reservation_info);
+	$this->annonymizeReservedBy($reservation_info, $usrname);
 
 	return json_encode(array("slots"=>$reservation_info));   
 
@@ -33,9 +33,9 @@ class Slots {
 #      ';
   }
 
-  private function annonymizeReservedBy(&$reservation_info) {
+  private function annonymizeReservedBy(&$reservation_info, $usrname) {
 	foreach($reservation_info as &$slot) {
-		if($slot["usr"] !== "userme") {
+		if($slot["usr"] !== $usrname) {
 			$slot["usr"] = null;
 		}	
 	}
