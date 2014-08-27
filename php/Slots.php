@@ -1,5 +1,5 @@
 <?php
-require_once('reservable.php');
+require_once('Reservable.php');
 
 class Slots {
 

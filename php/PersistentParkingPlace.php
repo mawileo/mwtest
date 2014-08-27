@@ -1,5 +1,5 @@
 <?php
-require_once('reservable.php');
+require_once('Reservable.php');
 #// mysqli
 #$mysqli = new mysqli("example.com", "user", "password", "database");
 #$result = $mysqli->query("SELECT 'Hello, dear MySQL user!' AS _message FROM DUAL");
