@@ -27,11 +27,5 @@ class PersistentParkingPlace implements Reservable {
 		    }
 
 		return $r;
-#		echo json_encode($r);
-#		echo "
-#		";
-
-		#$row = $result->fetch_assoc();
-		#echo htmlentities($row['_message']);
 	}
 }
