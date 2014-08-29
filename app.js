@@ -67,6 +67,12 @@
 	      });   
     }
 
+    this.lgt = function() {
+		$rootScope.usrname = null;
+		$rootScope.usrpwd = null;
+		$rootScope.rfrsh();
+    }
+
   }]);
 
 

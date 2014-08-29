@@ -19,82 +19,105 @@
     </div>
 -->
 
-<h3>Time slot schedule</h3>
-    <div class="container-outer">
-      <div class="container-inner, unselectable" ng-controller='SlotsController as slots'>
-<!--        <h5>ceiofcmeoictj39428utf598ucyfvghuic3m58t3cmhvgjv395uk5trt7hcguc3985tfcvuk5t98u43y6mvutmjgmvevc985ut75tyhv3igjc93</h5>-->
-        <form>
+<div id="header">
+HEADER
+
+</div>
+
+<div id="menu">
+MENU
+</div>
+
+<div id="content">
+
+	<h3>Time slot schedule</h3>
+	    <div class="container-outer">
+	      <div class="container-inner, unselectable" ng-controller='SlotsController as slots'>
+	<!--        <h5>ceiofcmeoictj39428utf598ucyfvghuic3m58t3cmhvgjv395uk5trt7hcguc3985tfcvuk5t98u43y6mvutmjgmvevc985ut75tyhv3igjc93</h5>-->
+		<form>
+		<table id="slots-table">
+		  <tr>
+		    <th class="vertical-text" ng-repeat="slot in slots.slots">{{slot.name}}</th>
+	<!--            <td class="vertical-text" ng-repeat="slot in slots.slots">{{slot.name}}</td>-->
+		  </tr>
+		  <tr>
+		    <td ng-repeat="slot in slots.slots" ng-class="{selected: chosen, available: slot.free, known: slot.usr}">
+		      <label for="{{slot.name}}"><input type="checkbox" id="{{slot.name}}" ng-model="chosen" ng-disabled="!slot.free"></label>
+		    </td> 
+		  </tr>
+		</table>
+		</form>
+	      </div>
+	    </div>
+
+	<div>
+	<h3>Legend</h3>
 	<table id="slots-table">
-          <tr>
-            <th class="vertical-text" ng-repeat="slot in slots.slots">{{slot.name}}</th>
-          </tr>
-          <tr>
-            <td ng-repeat="slot in slots.slots" ng-class="{selected: chosen, available: slot.free, known: slot.usr}">
-              <label for="{{slot.name}}"><input type="checkbox" id="{{slot.name}}" ng-model="chosen" ng-disabled="!slot.free"></label>
-            </td> 
-          </tr>
-        </table>
-        </form>
-      </div>
-    </div>
+	  <tr>
+	    <td class="available">slot is free</td> 
+	  </tr>
+	  <tr>
+	    <td class="known">slot already reserved by you</td> 
+	  </tr>
+	  <tr>
+	    <td class="selected">slot to be requested</td> 
+	  </tr>
+	  <tr>
+	    <td>slot is unavailable</td> 
+	  </tr>
+	</table>
+	</div>
 
-<div>
-<h3>Legend</h3>
-<table id="slots-table">
-  <tr>
-    <td class="available">slot is free</td> 
-  </tr>
-  <tr>
-    <td class="known">slot already reserved by you</td> 
-  </tr>
-  <tr>
-    <td class="selected">slot to be requested</td> 
-  </tr>
-  <tr>
-    <td>slot is unavailable</td> 
-  </tr>
-</table>
+
+	<!--
+	<table id="table1">
+	  <tr>
+	    <td>account</td>
+	    <td>l1</td>
+	    <td>l2</td>
+	  </tr>
+	  <tr>
+	    <td>123456</td>
+	    <td><label for="a"><input id="a" type="checkbox" name='123456[l1]'>name 1</label></td>
+	    <td><label for="b"><input id="b" type="checkbox" name='123456[l2]'>address 1</label></td>
+	  </tr>
+	  <tr>
+	    <td>654321</td>
+	    <td><label for="c"><input id="c" type="checkbox" name='654321[l1]'>name 2</label></td>
+	    <td><label for="d"><input id="d" type="checkbox" name='654321[l2]'>address 2</label></td>
+	  </tr>
+	</table>
+	-->
+
+
+	<h3>Login panel</h3>
+<!--	<h4 >Current user: {{ usrname }}</h4>			-->
+
+	<div>
+<!--		<form ng-controller="LoginController as lg" ng-submit="lg.lgn()">-->
+		<form ng-controller="LoginController as lg">
+			<div ng-hide="usrname">
+				<label for="usrname" >Username:<input type="text" id="usrname" ng-model="lg.usrname"></label>
+				<label for="usrpwd" >Password:<input type="password" id="usrpwd" ng-model="lg.usrpwd"></label>
+	<!--			<input type="submit" ng-hide="usrname" value="Login" />-->
+				<button ng-click="lg.lgn()" >Login</button>
+			</div>
+			<div ng-show="usrname">
+				<label>Current user: </h3><label><b>{{usrname}}</b>
+				<button ng-show="usrname" ng-click="lg.lgt()">Logout</button>
+			</div>
+			<br>
+		</form>
+	<!--		{{$rootScope.usrname}}/{{$rootScope.usrpwd}}-->
+	</div>
+	<!--		{{usrname}}/{{usrpwd}}-->
+
+
 </div>
 
-
-<!--
-<table id="table1">
-  <tr>
-    <td>account</td>
-    <td>l1</td>
-    <td>l2</td>
-  </tr>
-  <tr>
-    <td>123456</td>
-    <td><label for="a"><input id="a" type="checkbox" name='123456[l1]'>name 1</label></td>
-    <td><label for="b"><input id="b" type="checkbox" name='123456[l2]'>address 1</label></td>
-  </tr>
-  <tr>
-    <td>654321</td>
-    <td><label for="c"><input id="c" type="checkbox" name='654321[l1]'>name 2</label></td>
-    <td><label for="d"><input id="d" type="checkbox" name='654321[l2]'>address 2</label></td>
-  </tr>
-</table>
--->
-
-
-<h3>Login panel</h3>
-<h4>Current user: {{ usrname }}</h4>
-<div>
-	<form ng-controller="LoginController as lg" ng-submit="lg.lgn()">
-		Username:<input type="text" ng-model="lg.usrname">
-		Password:<input type="password" ng-model="lg.usrpwd">
-<!--		<button ng-click="lgn()">Login</button>-->
-		<input type="submit" value="Login" />
-		<br>
-	</form>
-<!--		{{$rootScope.usrname}}/{{$rootScope.usrpwd}}-->
+<div id="footer">
+FOOTER
 </div>
-<!--		{{usrname}}/{{usrpwd}}-->
-
-
-
-
 
 
   </body>

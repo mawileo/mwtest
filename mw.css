@@ -1,3 +1,61 @@
+body {
+	font-family: "Arial";
+	font-size: 80%;
+/*	background-color: #D0D0D0;*/
+/*	background: linear-gradient(to right, white, #0099CC);*/
+	color: #003399
+}
+
+input {
+	color: #003399;
+	border: 1px solid #003399;
+}
+
+input:focus {
+	border: 1px solid #003399;
+	outline: 0;
+}
+
+button {
+    background-color: #DDEEFF; 
+/*    padding: 2px 4px;*/
+/*    font: 13px sans-serif;*/
+/*    text-decoration: none;*/
+/*    border: 1px solid #000;*/
+    border-color: #003399;
+    color: #003399;
+}
+
+div#header {
+	border: 2px solid;
+	border-radius: 5px;
+	border-color: #003399;
+	width: 100%;
+}
+
+div#menu {
+	float: left;
+	width: 20%;
+/*	border: 2px solid;*/
+/*	border-radius: 5px;*/
+/*	border-color: #003399;*/
+}
+
+div#content {
+	float: left;
+	width: 80%;
+/*	border: 2px solid;*/
+/*	border-radius: 5px;*/
+/*	border-color: #003399;*/
+}
+
+div#footer {
+	float: left;
+	border: 2px solid;
+	border-radius: 5px;
+	border-color: #003399;
+	width: 100%;
+}
 
 .container-outer {
 	overflow: scroll;
