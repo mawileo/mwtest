@@ -12,6 +12,7 @@ class Slots {
   public function getSlotMap($usrname) {
 
 	$reservation_info = $this->reservable->getCurrentSchedule();
+#	$this->addtheFreeField($reservation_info);
 	$this->annonymizeReservedBy($reservation_info, $usrname);
 
 	return json_encode(array("slots"=>$reservation_info));   
@@ -31,6 +32,16 @@ class Slots {
 #	]
 #	}
 #      ';
+  }
+
+  private function addtheFreeField(&$reservation_info) {
+	foreach($reservation_info as &$slot) {
+		if($slot["usr"]) {
+			$slot["free"] = false;
+		} else {
+			$slot["free"] = true;
+		}
+	}
   }
 
   private function annonymizeReservedBy(&$reservation_info, $usrname) {

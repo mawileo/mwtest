@@ -1,5 +1,5 @@
 
-arcin@Spandau:~/Dev/php_install/php-5.5.15$ ./configure --prefix=/home/marcin/Dev/php --with-apxs2=/home/marcin/Dev/apache2/bin/apxs --with-mysql --with-config-file-path=/home/marcin/Dev/php/lib --with-mysqli
+marcin@Spandau:~/Dev/php_install/php-5.5.15$ ./configure --prefix=/home/marcin/Dev/php --with-apxs2=/home/marcin/Dev/apache2/bin/apxs --with-mysql --with-config-file-path=/home/marcin/Dev/php/lib --with-mysqli --enable-calendar
 
 make
 make install

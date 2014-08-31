@@ -37,12 +37,12 @@ MENU
 		<form>
 		<table id="slots-table">
 		  <tr>
-		    <th class="vertical-text" ng-repeat="slot in slots.slots">{{slot.name}}</th>
+		    <th class="vertical-text" ng-repeat="slot in slots.slots">{{slot.hour + ':' + slot.minute}}</th>
 	<!--            <td class="vertical-text" ng-repeat="slot in slots.slots">{{slot.name}}</td>-->
 		  </tr>
 		  <tr>
 		    <td ng-repeat="slot in slots.slots" ng-class="{selected: chosen, available: slot.free, known: slot.usr}">
-		      <label for="{{slot.name}}"><input type="checkbox" id="{{slot.name}}" ng-model="chosen" ng-disabled="!slot.free"></label>
+		      <label for="{{slot.id}}"><input type="checkbox" id="{{slot.id}}" ng-model="chosen" ng-disabled="!slot.free"></label>
 		    </td> 
 		  </tr>
 		</table>
