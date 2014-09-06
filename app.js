@@ -16,6 +16,7 @@
 
     slotsCtrl.slots = slts;
     slotsCtrl.slots = [];
+    slotsCtrl.nbr = 0;
 
 //    $rootScope.$on('lgnEvent', function(event, args) { ; });
 
@@ -35,6 +36,17 @@
     reloadSlots();
 
     $rootScope.rfrsh = reloadSlots;
+
+    var getNumberOfSelectedSlots = function() {
+	var retVal = 0;
+	for (var i in slotsCtrl.slots) {
+		if (slotsCtrl.slots[i].chosen == true) retVal += 1;
+	}
+	slotsCtrl.nbr = retVal;
+    }
+    slotsCtrl.getNbr = getNumberOfSelectedSlots; 
+
+
   }]);
 
 

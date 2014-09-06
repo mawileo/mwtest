@@ -30,9 +30,10 @@ MENU
 
 <div id="content">
 
+	<div ng-controller='SlotsController as slots'>
 	<h3>Time slot schedule</h3>
 	    <div class="container-outer">
-	      <div class="container-inner, unselectable" ng-controller='SlotsController as slots'>
+	      <div class="container-inner, unselectable"  ng-click="slots.getNbr()">
 	<!--        <h5>ceiofcmeoictj39428utf598ucyfvghuic3m58t3cmhvgjv395uk5trt7hcguc3985tfcvuk5t98u43y6mvutmjgmvevc985ut75tyhv3igjc93</h5>-->
 		<form>
 		<table id="slots-table">
@@ -41,14 +42,26 @@ MENU
 	<!--            <td class="vertical-text" ng-repeat="slot in slots.slots">{{slot.name}}</td>-->
 		  </tr>
 		  <tr>
-		    <td ng-repeat="slot in slots.slots" ng-class="{selected: chosen, available: slot.free, known: slot.usr}">
-		      <label for="{{slot.id}}"><input type="checkbox" id="{{slot.id}}" ng-model="chosen" ng-disabled="!slot.free"></label>
+		    <td ng-repeat="slot in slots.slots" ng-class="{selected: slot.chosen, available: slot.free, known: slot.usr}">
+<!--		      <label for="{{slot.id}}"><input type="checkbox" id="{{slot.id}}" ng-model="chosen" ng-disabled="!slot.free"></label>-->
+		      <label for="{{slot.id}}"><input type="checkbox" id="{{slot.id}}" ng-model="slot.chosen" ng-disabled="!slot.free" ></label>
 		    </td> 
 		  </tr>
 		</table>
 		</form>
 	      </div>
 	    </div>
+
+	    <div>
+		Number of selected slots:{{slots.nbr}}
+
+	      <form>
+				<button ng-click="slots.getNbr()" ng-disabled="slots.nbr<1">Reserve</button>
+	      </form>
+	    </div>
+
+
+	</div>
 
 	<div>
 	<h3>Legend</h3>

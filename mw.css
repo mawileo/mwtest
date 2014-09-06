@@ -26,6 +26,17 @@ button {
     color: #003399;
 }
 
+button:disabled {
+    background-color: #E0E0E0; 
+/*    padding: 2px 4px;*/
+/*    font: 13px sans-serif;*/
+/*    text-decoration: none;*/
+/*    border: 1px solid #000;*/
+    border-color: #B0B0B0;
+    color: #A0A0A0;
+}
+
+
 div#header {
 	border: 2px solid;
 	border-radius: 5px;
