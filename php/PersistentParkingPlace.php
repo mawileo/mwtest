@@ -87,22 +87,48 @@ class PersistentParkingPlace implements Reservable {
 		return $arr;
 	}
 
-	public function makeReservation($fromDateTimeString, $toDateTimeString, $user) {
-		$dt = DateTime::createFromFormat("Y-m-d G:i:s", $fromDateTimeString, new DateTimeZOne("Europe/Zurich"));
-		$fromSlot = Slot::dateTimeToSlotId($dt);
-		$dt = DateTime::createFromFormat("Y-m-d G:i:s", $toDateTimeString, new DateTimeZOne("Europe/Zurich"));
-		$toSlot = Slot::dateTimeToSlotId($dt);
-		if($fromSlot>$toSlot) {
-			http_response_code(400);
-			exit;
-		}
-		$this->reserveSlots($fromSlot, $toSlot, $user);
-	}
-	
-	private function reserveSlots($startSlotId, $endSlotId, $user) {
+#	public function makeReservation($fromDateTimeString, $toDateTimeString, $user) {
+#		$dt = DateTime::createFromFormat("Y-m-d G:i:s", $fromDateTimeString, new DateTimeZOne("Europe/Zurich"));
+#		$fromSlot = Slot::dateTimeToSlotId($dt);
+#		$dt = DateTime::createFromFormat("Y-m-d G:i:s", $toDateTimeString, new DateTimeZOne("Europe/Zurich"));
+#		$toSlot = Slot::dateTimeToSlotId($dt);
+#		if($fromSlot>$toSlot) {
+#			http_response_code(400);
+#			exit;
+#		}
+#		$this->reserveSlots($fromSlot, $toSlot, $user);
+#	}
+
+	public function makeReservation($ranges) {
 
 		$mysqli = new mysqli("127.0.0.1", "innowo_mwtestusr", "innowo_mwtestusrpwd", "innowo_mwtestdb");
 		$mysqli->autocommit(FALSE);
+
+		foreach($ranges as $range) {
+			if ( !isset($range["from"]) || !isset($range["to"]) || !isset($range["user"]) ) {
+				$mysqli->rollback();
+				http_response_code(400);
+				echo "wrong parameters";
+				exit;
+			}
+			
+			$fromSlot = Slot::dateTimeStringToSlotId($range["from"]);
+			$toSlot = Slot::dateTimeStringToSlotId($range["to"]);
+			if($fromSlot>$toSlot) {
+				http_response_code(400);
+				exit;
+			}
+			$this->reserveRange($fromSlot, $toSlot, $range["user"] ,$mysqli);
+		}
+
+		if (!$mysqli->commit()) {
+			print("Transaction commit failed\n");
+			exit();
+		}
+	}
+	
+	private function reserveRange($startSlotId, $endSlotId, $user, &$mysqli) {
+
 
 		$result = $mysqli->query("SELECT id, name, usr FROM mwt_slots WHERE id between ".$startSlotId." and ".$endSlotId." and usr is not null order by id");
 		
@@ -143,11 +169,6 @@ class PersistentParkingPlace implements Reservable {
 					exit();
 				} 				
 			}
-		}
-
-		if (!$mysqli->commit()) {
-			print("Transaction commit failed\n");
-			exit();
 		}
 
 	}

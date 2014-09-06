@@ -17,20 +17,29 @@ $post_data_structure = json_decode($post_data_string, true);
 
 #var_dump($post_data_structure);
 
-if ( !isset($post_data_structure["from"]) || !isset($post_data_structure["to"]) || !isset($post_data_structure["user"]) ) {
-	http_response_code(400);
-	echo "no expected parameters";
-	exit;
-}
-
 $usr = $auth->getAuthenticatedUser();
-if ( !$usr || $usr!=$post_data_structure["user"] ) {
+
+if ( !$usr ) {
 	http_response_code(401);
 	echo "bad credentials";
 	exit;
 }
 
-$dbacc->makeReservation($post_data_structure["from"],$post_data_structure["to"],$usr);
+foreach($post_data_structure as $range) {
+	if ( !isset($range["from"]) || !isset($range["to"]) || !isset($range["user"]) ) {
+		http_response_code(400);
+		echo "wrong parameters: \n".$post_data_string;
+		exit;
+	}
+	if ( $usr!=$range["user"] ) {
+		http_response_code(401);
+		echo "user unauthorized";
+		exit;
+	}
+}
+
+#$dbacc->makeReservation($post_data_structure["from"],$post_data_structure["to"],$usr);
+$dbacc->makeReservation($post_data_structure);
 
 
 echo "\n";

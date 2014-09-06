@@ -59,6 +59,41 @@ class Slot {
 		return $this->tmpdt->format("i");
 	}
 	
+	function getSecond() {
+		$this->tmpdt->setTimestamp($this->id);
+		return $this->tmpdt->format("s");
+	}
+
+	function getSlotEndYear() {
+		$this->tmpdt->setTimestamp($this->getSlotsLastSecondTimestamp());
+		return $this->tmpdt->format("Y");
+	}
+
+	function getSlotEndMonth() {
+		$this->tmpdt->setTimestamp($this->getSlotsLastSecondTimestamp());
+		return $this->tmpdt->format("m");
+	}
+
+	function getSlotEndDay() {
+		$this->tmpdt->setTimestamp($this->getSlotsLastSecondTimestamp());
+		return $this->tmpdt->format("d");
+	}
+
+	function getSlotEndHour() {
+		$this->tmpdt->setTimestamp($this->getSlotsLastSecondTimestamp());
+		return $this->tmpdt->format("H");
+	}
+
+	function getSlotEndMinute() {
+		$this->tmpdt->setTimestamp($this->getSlotsLastSecondTimestamp());
+		return $this->tmpdt->format("i");
+	}
+	
+	function getSlotEndSecond() {
+		$this->tmpdt->setTimestamp($this->getSlotsLastSecondTimestamp());
+		return $this->tmpdt->format("s");
+	}
+
 	function getTimezone() {
 		return $this->tmpdt->getTimezone()->getName();
 	}
@@ -70,6 +105,8 @@ class Slot {
 	function toAssociativeArray() {
 		return array(
 			"id" => $this->id,
+			"from" => $this->getYear()."-".$this->getMonth()."-".$this->getDay()." ".$this->getHour().":".$this->getMinute().":".$this->getSecond(),
+			"to" => $this->getSlotEndYear()."-".$this->getSlotEndMonth()."-".$this->getSlotEndDay()." ".$this->getSlotEndHour().":".$this->getSlotEndMinute().":".$this->getSlotEndSecond(),
 			"timezone" => $this->getTimezone(),
 			"year" => $this->getYear(),
 			"month" => $this->getMonth(),
@@ -80,6 +117,12 @@ class Slot {
 			"free" => $this->isFree(),
 			"name" => "NM"
 			);
+	}
+
+	public static function dateTimeStringToSlotId($dateTimeString) {
+		$dt = DateTime::createFromFormat("Y-m-d G:i:s", $dateTimeString, new DateTimeZOne("Europe/Zurich"));
+		$slotId = Slot::dateTimeToSlotId($dt);
+		return $slotId;
 	}
 
 	public static function dateTimeToSlotId(DateTime $dt) {
@@ -100,7 +143,13 @@ class Slot {
 		return (integer) ( $utcDt->getTimestamp() );
 	}
 
-	
+	public function getSlotsLastSecondTimestamp() {
+		$utcDt = new DateTime(null, new DateTimeZone("UTC"));
+		$utcDt->setTimestamp($this->id);
+		$utcDt->add(new DateInterval("PT".(Slot::slotLengthInMinutes)."M"));
+		$utcDt->sub(new DateInterval("PT1S"));
+		return (integer) ( $utcDt->getTimestamp() );
+	}	
 }
 
 

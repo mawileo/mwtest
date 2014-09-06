@@ -56,7 +56,7 @@ MENU
 		Number of selected slots:{{slots.nbr}}
 
 	      <form>
-				<button ng-click="slots.getNbr()" ng-disabled="slots.nbr<1">Reserve</button>
+				<button ng-click="slots.reserve()" ng-disabled="slots.nbr<1 || !usrname ">Reserve</button>
 	      </form>
 	    </div>
 
